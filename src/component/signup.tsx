@@ -8,7 +8,7 @@ export const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(firstName, lastName, email, username, password);
     const response = await fetch("http://localhost:4000/auth/signup", {
