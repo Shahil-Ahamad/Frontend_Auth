@@ -5,19 +5,32 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [messsage, setMessage] = useState("");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setMessage("");
     console.log(username, password);
     const response = await fetch("http://localhost:4000/auth/login", {
       method: "POST",
+      credentials: "include",
       body: JSON.stringify({
         username,
         password,
+
       }),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
+
+    if (!response.json) {
+      setMessage(data.messsage);
+      return;
+    }
+
     console.log("Login Output", data);
+
+    navigate("/dashboard");
   };
 
   const navigate = useNavigate();
