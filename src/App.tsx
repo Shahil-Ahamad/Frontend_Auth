@@ -1,17 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { DashboardPage } from "./pages/dashboard";
+import { AuthProvider } from "./store/auth";
 import { Login } from "./component/login";
 import { SignUp } from "./component/signup";
-import { Dashboard } from "./pages/dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <Login />
-      </>
-    ),
+    element: <Login />,
   },
+  
   {
     path: "/SignUp",
     element: (
@@ -21,18 +21,16 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path:"/dashboard",
-    element: (<>
-    <Dashboard/>
-    </>),
-  }
+    path: "/dashboard",
+    element: <DashboardPage />,
+  },
 ]);
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router} />;
-    </>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   );
 }
 
